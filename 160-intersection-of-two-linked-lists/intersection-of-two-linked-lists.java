@@ -11,23 +11,40 @@
  */
 public class Solution {
     public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
+        int sizeA = size(headA);
+        int sizeB = size(headB);
 
-        ListNode nodeA=headA;
-        ListNode nodeB=headB;
+        if(sizeA<sizeB){
+            return intersection(headA,headB,sizeB-sizeA);
+        }
+        else{
+            return intersection(headB,headA,sizeA-sizeB);
+        }
+    }
 
-        while(nodeA!=nodeB){
-            if(nodeA!=null){
-                nodeA=nodeA.next;
-            }else{
-                nodeA=headB;
-            }
-            if(nodeB!=null){
-                nodeB=nodeB.next;
-            }else{
-                nodeB=headA;
-            }
+    public static int size(ListNode head){
+        ListNode temp = head;
+        int count = 0;
+        while(temp!=null){
+            count++;
+            temp=temp.next;
         }
 
-        return nodeA;
+        return count;
+    }
+
+    public static ListNode intersection(ListNode small,ListNode large, int n){
+
+        while(n!=0){
+            large=large.next;
+            n--;
+        }
+        while(small!=null){
+            if(small==large)return small;
+            small=small.next;
+            large= large.next;
+        }
+
+        return null;
     }
 }
