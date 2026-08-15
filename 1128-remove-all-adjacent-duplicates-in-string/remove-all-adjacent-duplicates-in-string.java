@@ -3,9 +3,7 @@ class Solution {
         Deque<Character> queue = new ArrayDeque<>();
 
         for(char c :s.toCharArray()){
-            if(queue.isEmpty()){
-                queue.offerLast(c);
-            }else if( queue.peekLast() != c){
+            if(queue.isEmpty() || queue.peekLast() != c ){
                 queue.offerLast(c);
             }else{
                 queue.pollLast();
