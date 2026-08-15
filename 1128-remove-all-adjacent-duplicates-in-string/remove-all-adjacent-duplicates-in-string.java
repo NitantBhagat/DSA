@@ -1,22 +1,17 @@
 class Solution {
     public String removeDuplicates(String s) {
-        Deque<Character> queue = new ArrayDeque<>();
+        StringBuilder sb = new StringBuilder();
 
-        for(char c :s.toCharArray()){
-            if(queue.isEmpty() || queue.peekLast() != c ){
-                queue.offerLast(c);
+        for(char c : s.toCharArray()){
+            int n = sb.length();
+
+            if(n>0 && sb.charAt(n-1) ==c){
+                sb.deleteCharAt(n-1);
             }else{
-                queue.pollLast();
+                sb.append(c);
             }
         }
 
-        StringBuilder sb = new StringBuilder();
-        
-        while(!queue.isEmpty()){
-            sb.append(queue.pollFirst());
-        }
-
-        String res = sb.toString();
-        return res;
-}
+        return sb.toString();
+    }
 }
